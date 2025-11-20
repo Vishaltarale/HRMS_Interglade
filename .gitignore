@@ -1,0 +1,12 @@
+# Virtual environment
+venv/
+env/
+
+# Python cache
+__pycache__/
+
+# Environment files
+.env
+
+# Media and static files (if auto-generated)
+media/
