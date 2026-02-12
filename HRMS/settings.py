@@ -28,11 +28,11 @@ ALLOWED_HOSTS = [
     "http://localhost:5173",
     "*",
     "distillatory-neoma-unmoldy.ngrok-free.dev",
-    "localhost",
     "127.0.0.1",
     "192.168.1.35",
-    ".vercel.app",
     "https://*.vercel.app",
+      ".vercel.app",
+    "localhost"
     
 ]
 
@@ -184,7 +184,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "assets")
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-DEBUG = True
+DEBUG = False
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 104857600  # 100MB
 FILE_UPLOAD_MAX_MEMORY_SIZE = 104857600  # 100MB
