@@ -5,10 +5,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
-from Employee.serializer import StudentSerializer
+from Orgnization.pagination import CustomPagination
 import logging
-
-
 
 @api_view(['POST'])
 def create_dept(request):
@@ -20,16 +18,13 @@ def create_dept(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 # GET /org/fetch/?page=1
 # GET /org/fetch/?page=2
 @api_view(['GET'])
 def list_dept(request):
-    paginator = PageNumberPagination()
-    paginator.page_size = 10  
+    paginator = CustomPagination()
 
     org = Departments.objects.all()
-
     result_page = paginator.paginate_queryset(org, request)
     serializer = DepartmentsSerializer(result_page, many=True)
 

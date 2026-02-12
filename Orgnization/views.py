@@ -4,11 +4,8 @@ from Orgnization.models import Organization
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-
 from rest_framework.pagination import PageNumberPagination
-from Employee.serializer import StudentSerializer
 import logging
-
 
 @api_view(['POST'])
 def create_org(request):
@@ -20,19 +17,16 @@ def create_org(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 # GET /org/fetch/?page=1
 # GET /org/fetch/?page=2
+from Orgnization.pagination import CustomPagination
 @api_view(['GET'])
 def list_org(request):
-    paginator = PageNumberPagination()
-    paginator.page_size = 10  
-
+    paginator = CustomPagination()
     org = Organization.objects.all()
-
     result_page = paginator.paginate_queryset(org, request)
     serializer = OrgnizationSerializer(result_page, many=True)
-
+    
     return paginator.get_paginated_response(serializer.data)
 
 @api_view(['GET'])
@@ -44,7 +38,7 @@ def fetch_org(request,pk):
     serializer = OrgnizationSerializer(org)
     return Response(serializer.data,status=status.HTTP_200_OK)
 
-@api_view(['PUT'])
+@api_view(['PUT','PATCH'])
 def update_org(request,pk):
     try:
         org = Organization.objects.get(id=pk)

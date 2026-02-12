@@ -6,7 +6,7 @@ class Organization(Document):
     orgContact = StringField(required=True, max_length=100)  # Only digits, 10–12 length
     orgEmail = StringField(required=True, unique=True)
     orgLink = StringField(required=True)
-    orgStatus = StringField(required=True)
+    orgStatus = StringField(required=True,choices=["Active", "Inactive"])
 
     meta = {
         'collection': 'organizations',
